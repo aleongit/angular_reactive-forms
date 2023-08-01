@@ -18,7 +18,7 @@
     <input id="state" type="text" formControlName="state">
 
     <label for="zip">Zip Code: </label>
-    <input id="zip"type="text" formControlName="zip">
+    <input id="zip" type="text" formControlName="zip">
   </div>
 
   <div formArrayName="aliases">
@@ -44,3 +44,11 @@
 <p>Form Status: {{ profileForm.status }}</p>
 
 <button type="button" (click)="updateProfile()">Update Profile</button>
+<button type="button" (click)="showObjectObject()">Show Object Object</button>
+<button type="button" (click)="getFormValidationErrors()">getFormValidationErrors</button>
+
+<!-- test -->
+<div>
+<p>{{ profileForm.controls['firstName'].errors | json }}</p>
+<p>{{ profileForm.controls['lastName'].errors | json }}</p>
+</div>

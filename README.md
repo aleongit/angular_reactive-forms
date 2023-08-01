@@ -83,3 +83,10 @@
 - https://angular.io/api/core/EventEmitter
 
 
+### angular - questions
+- https://stackoverflow.com/questions/40680321/get-all-validation-errors-from-angular-2-formgroup
+
+
+
+### typescript - questions
+- https://timmousk.com/blog/typescript-object-is-possibly-null/
