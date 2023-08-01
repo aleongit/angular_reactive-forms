@@ -73,7 +73,10 @@
 - https://angular.io/api/forms/ReactiveFormsModule
 - https://angular.io/api/forms/FormControlDirective
 - https://angular.io/api/forms/FormControl
+- https://angular.io/api/forms/FormControlName
 - https://angular.io/api/forms/AbstractControl
 - https://angular.io/api/common/AsyncPipe
+- https://angular.io/api/common/JsonPipe
+- https://angular.io/api/core/EventEmitter
 
 
