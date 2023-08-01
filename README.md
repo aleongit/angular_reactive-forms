@@ -55,6 +55,7 @@
 ### angular - guide
 - https://angular.io/guide/forms
 - https://angular.io/guide/forms-overview
+- https://angular.io/guide/form-validation
 - https://angular.io/guide/glossary#observable
 - https://angular.io/guide/reactive-forms#reactive-forms-api
 - https://angular.io/guide/reactive-forms#basic-form-validation
@@ -76,6 +77,7 @@
 - https://angular.io/api/forms/FormControlName
 - https://angular.io/api/forms/AbstractControl
 - https://angular.io/api/forms/FormBuilder
+- https://angular.io/api/forms/Validators
 - https://angular.io/api/common/AsyncPipe
 - https://angular.io/api/common/JsonPipe
 - https://angular.io/api/core/EventEmitter

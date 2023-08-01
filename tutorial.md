@@ -445,3 +445,71 @@ export class ProfileEditorComponent {
 - In the preceding example, you use the `group()` method with the same object to define the properties in the model. The value for each control name is an array containing the initial value as the first item in the array.
 
 - You can define the control with just the initial value, but if your controls need sync or async validation, add sync and async validators as the second and third items in the array.
+
+
+
+## Validating form input
+
+- *Form validation* is used to ensure that user input is complete and correct. This section covers adding a single validator to a form control and displaying the overall form status. Form validation is covered more extensively in the [Form Validation](https://angular.io/guide/form-validation) guide.
+
+- Use the following steps to add form validation.
+
+1. Import a validator function in your form component.
+2. Add the validator to the field in the form.
+3. Add logic to handle the validation status.
+
+- The most common validation is making a field required. The following example shows how to add a required validation to the `firstName` control and display the result of validation.
+
+
+
+#### Import a validator function
+
+- Reactive forms include a set of validator functions for common use cases. These functions receive a control to validate against and return an error object or a null value based on the validation check.
+
+- Import the `Validators` class from the `@angular/forms` package.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+import { Validators } from '@angular/forms';
+```
+
+
+
+#### Make a field required
+
+- In the `ProfileEditor` component, add the `Validators.required` static method as the second item in the array for the `firstName` control.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+profileForm = this.fb.group({
+  firstName: ['', Validators.required],
+  lastName: [''],
+  address: this.fb.group({
+    street: [''],
+    city: [''],
+    state: [''],
+    zip: ['']
+  }),
+});
+```
+
+
+#### Display form status
+
+- When you add a required field to the form control, its initial status is invalid. This invalid status propagates to the parent form group element, making its status invalid. Access the current status of the form group instance through its `status` property.
+
+- Display the current status of `profileForm` using interpolation.
+
+- **src/app/profile-editor/profile-editor.component.html**
+```html
+<p>Form Status: {{ profileForm.status }}</p>
+```
+
+- The **Submit** button is disabled because `profileForm` is invalid due to the required `firstName` form control. After you fill out the `firstName` input, the form becomes valid and the **Submit** button is enabled.
+
+- For more on form validation, visit the [Form Validation](https://angular.io/guide/form-validation) guide.
+
+
+
+
+## Creating dynamic forms
