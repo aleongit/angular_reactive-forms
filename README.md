@@ -56,9 +56,24 @@
 - https://angular.io/guide/forms
 - https://angular.io/guide/forms-overview
 - https://angular.io/guide/glossary#observable
+- https://angular.io/guide/reactive-forms#reactive-forms-api
+- https://angular.io/guide/reactive-forms#basic-form-validation
+- https://angular.io/guide/reactive-forms#grouping-form-controls
+- https://angular.io/guide/reactive-forms#creating-dynamic-forms
+
+
+
+### angular - cli
+- https://angular.io/cli/generate#component-command
 
 
 
 ### angular - api
-- TODO:
+- https://angular.io/api/forms
+- https://angular.io/api/forms/ReactiveFormsModule
+- https://angular.io/api/forms/FormControlDirective
+- https://angular.io/api/forms/FormControl
+- https://angular.io/api/forms/AbstractControl
+- https://angular.io/api/common/AsyncPipe
+
 
