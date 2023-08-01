@@ -372,3 +372,76 @@ updateProfile() {
 ```
 
 - When a user clicks the button, the `profileForm` model is updated with new values for `firstName` and `street`. Notice that `street` is provided in an object inside the `address` property. This is necessary because the `patchValue()` method applies the update against the model structure. `PatchValue()` only updates properties that the form model defines.
+
+
+
+## Using the *FormBuilder* service to generate controls
+
+- Creating form control instances manually can become repetitive when dealing with multiple forms. `The FormBuilder` service provides convenient methods for generating controls.
+
+- Use the following steps to take advantage of this service.
+
+1. Import the `FormBuilder` class.
+2. Inject the `FormBuilder` service.
+3. Generate the form contents.
+
+- The following examples show how to refactor the `ProfileEditor` component to use the form builder service to create form control and form group instances
+
+
+
+
+#### Import the *FormBuilder* class
+
+- Import the `FormBuilder` class from the `@angular/forms` package.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+import { FormBuilder } from '@angular/forms';
+```
+
+
+
+#### Inject the *FormBuilder* service
+
+- The `FormBuilder` service is an injectable provider that is provided with the reactive forms module. Inject this dependency by adding it to the component constructor.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+constructor(private fb: FormBuilder) { }
+```
+
+
+
+#### Generate form controls
+
+- The `FormBuilder` service has three methods: `control()`, `group()`, and `array()`. These are factory methods for generating instances in your component classes including form controls, form groups, and form arrays. Use the group method to create the `profileForm` controls.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+
+@Component({
+  selector: 'app-profile-editor',
+  templateUrl: './profile-editor.component.html',
+  styleUrls: ['./profile-editor.component.css']
+})
+export class ProfileEditorComponent {
+  profileForm = this.fb.group({
+    firstName: [''],
+    lastName: [''],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    }),
+  });
+
+  constructor(private fb: FormBuilder) { }
+}
+```
+
+- In the preceding example, you use the `group()` method with the same object to define the properties in the model. The value for each control name is an array containing the initial value as the first item in the array.
+
+- You can define the control with just the initial value, but if your controls need sync or async validation, add sync and async validators as the second and third items in the array.
