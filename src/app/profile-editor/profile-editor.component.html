@@ -51,5 +51,6 @@
 <div>
 <p>{{ profileForm.controls['firstName'].errors | json }}</p>
 <p>{{ profileForm.controls['lastName'].errors | json }}</p>
+<p>{{ profileForm.controls['address'].controls['city'].errors | json }}</p>
 <p>{{ getFormValidationErrors(profileForm) | json }}</p>
 </div>
