@@ -3,6 +3,13 @@ import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { FormArray } from '@angular/forms';
 import { ValidationErrors } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+
+export interface IFormError {
+  control: string;
+  error: string;
+  value: any;
+}
 
 @Component({
   selector: 'app-profile-editor',
@@ -51,18 +58,32 @@ export class ProfileEditorComponent {
     console.log(this.profileForm);
   }
 
-  // TODO: errors de subgrups
-  getFormValidationErrors() {
-    Object.keys(this.profileForm.controls).forEach((key) => {
-      const controlErrors: ValidationErrors | null  = this.profileForm.get(key)!.errors;
-      if (controlErrors != null) {
-        Object.keys(controlErrors).forEach((keyError) => {
-          console.log(
-            'Key control: ' + key + ', keyError: ' + keyError + ', err value: ',
-            controlErrors[keyError]
-          );
+
+ //recursiva pels FormGroup dins FormGroup
+  getFormValidationErrors(form: FormGroup) {
+    const result: IFormError[] = [];
+    Object.keys(form.controls).forEach(key => {
+      const formProperty = form.get(key);
+      if (formProperty instanceof FormGroup) {
+        result.push(...this.getFormValidationErrors(formProperty))
+      }
+      const controlErrors: ValidationErrors | null = formProperty!.errors;
+      if (controlErrors) {
+        Object.keys(controlErrors).forEach(keyError => {
+          result.push({
+            'control': key,
+            'error': keyError,
+            'value': controlErrors[keyError]
+          });
         });
       }
     });
+    console.log(result);
+    return result;
   }
+
+
+
+
+
 }

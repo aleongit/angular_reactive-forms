@@ -45,10 +45,11 @@
 
 <button type="button" (click)="updateProfile()">Update Profile</button>
 <button type="button" (click)="showObjectObject()">Show Object Object</button>
-<button type="button" (click)="getFormValidationErrors()">getFormValidationErrors</button>
+<button type="button" (click)="getFormValidationErrors(profileForm)">getFormValidationErrors</button>
 
 <!-- test -->
 <div>
 <p>{{ profileForm.controls['firstName'].errors | json }}</p>
 <p>{{ profileForm.controls['lastName'].errors | json }}</p>
+<p>{{ getFormValidationErrors(profileForm) | json }}</p>
 </div>

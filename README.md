@@ -85,6 +85,9 @@
 
 ### angular - questions
 - https://stackoverflow.com/questions/40680321/get-all-validation-errors-from-angular-2-formgroup
+- https://gist.github.com/domagoj03/befeb17c17ff3ede2d36b8f59f0ad6a6#file-get-form-validation-errors-ts
+- https://stackoverflow.com/questions/44136239/angular2-show-all-form-group-validation-errors
+- https://stackoverflow.com/questions/46926182/property-controls-does-not-exist-on-type-abstractcontrol-angular-4
 
 
 
