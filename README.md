@@ -75,8 +75,12 @@
 - https://angular.io/api/forms/FormControlDirective
 - https://angular.io/api/forms/FormControl
 - https://angular.io/api/forms/FormControlName
+- https://angular.io/api/forms/FormGroupName
+- https://angular.io/api/forms/FormArrayName
 - https://angular.io/api/forms/AbstractControl
 - https://angular.io/api/forms/FormBuilder
+- https://angular.io/api/forms/FormBuilder#array
+- https://angular.io/api/forms/FormBuilder#control
 - https://angular.io/api/forms/Validators
 - https://angular.io/api/common/AsyncPipe
 - https://angular.io/api/common/JsonPipe

@@ -28,7 +28,7 @@ export class ProfileEditorComponent {
     }),
     aliases: this.fb.array([this.fb.control('')]),
   });
-
+  
   get aliases() {
     return this.profileForm.get('aliases') as FormArray;
   }

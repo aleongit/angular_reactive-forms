@@ -513,3 +513,113 @@ profileForm = this.fb.group({
 
 
 ## Creating dynamic forms
+
+- `FormArray` is an alternative to `FormGroup` for managing any number of unnamed controls. As with form group instances, you can dynamically insert and remove controls from form array instances, and the form array instance value and validation status is calculated from its child controls. However, you don't need to define a key for each control by name, so this is a great option if you don't know the number of child values in advance.
+
+- To define a dynamic form, take the following steps.
+
+1. Import the `FormArray` class.
+2. Define a `FormArray` control.
+3. Access the `FormArray` control with a getter method.
+4. Display the form array in a template.
+
+- The following example shows you how to manage an array of *aliases* in `ProfileEditor`.
+
+
+
+#### Import the *FormArray* class
+
+- Import the `FormArray` class from `@angular/forms` to use for type information. The `FormBuilder` service is ready to create a `FormArray` instance.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+import { FormArray } from '@angular/forms';
+```
+
+
+#### Define a *FormArray* control
+
+- You can initialize a form array with any number of controls, from zero to many, by defining them in an array. Add an `aliases` property to the form group instance for `profileForm` to define the form array.
+
+- Use the `FormBuilder.array()` method to define the array, and the `FormBuilder.control()` method to populate the array with an initial control.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+profileForm = this.fb.group({
+  firstName: ['', Validators.required],
+  lastName: [''],
+  address: this.fb.group({
+    street: [''],
+    city: [''],
+    state: [''],
+    zip: ['']
+  }),
+  aliases: this.fb.array([
+    this.fb.control('')
+  ])
+});
+```
+
+- The aliases control in the form group instance is now populated with a single control until more controls are added dynamically.
+
+
+
+#### Access the *FormArray* control
+
+- A getter provides access to the aliases in the form array instance compared to repeating the `profileForm.get()` method to get each instance. The form array instance represents an undefined number of controls in an array. It's convenient to access a control through a getter, and this approach is straightforward to repeat for additional controls.
+
+- Use the getter syntax to create an `aliases` class property to retrieve the alias's form array control from the parent form group.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+get aliases() {
+  return this.profileForm.get('aliases') as FormArray;
+}
+```
+
+- Because the returned control is of the type `AbstractControl`, you need to provide an explicit type to access the method syntax for the form array instance.
+
+- Define a method to dynamically insert an alias control into the alias's form array. The `FormArray.push()` method inserts the control as a new item in the array.
+
+- **src/app/profile-editor/profile-editor.component.ts**
+```ts
+addAlias() {
+  this.aliases.push(this.fb.control(''));
+}
+```
+
+- In the template, each control is displayed as a separate input field.
+
+
+
+#### Display the form array in the template
+
+- To attach the aliases from your form model, you must add it to the template. Similar to the `formGroupName` input provided by `FormGroupNameDirective`, `formArrayName` binds communication from the form array instance to the template with `FormArrayNameDirective`.
+
+- Add the following template HTML after the `<div>` closing the `formGroupName` element.
+
+- **src/app/profile-editor/profile-editor.component.html**
+```html
+<div formArrayName="aliases">
+  <h2>Aliases</h2>
+  <button type="button" (click)="addAlias()">+ Add another alias</button>
+
+  <div *ngFor="let alias of aliases.controls; let i=index">
+    <!-- The repeated alias template -->
+    <label for="alias-{{ i }}">Alias:</label>
+    <input id="alias-{{ i }}" type="text" [formControlName]="i">
+  </div>
+</div>
+```
+
+- The `*ngFor` directive iterates over each form control instance provided by the aliases form array instance. Because form array elements are unnamed, you assign the index to the `i` variable and pass it to each control to bind it to the `formControlName` input.
+
+- Each time a new alias instance is added, the new form array instance is provided its control based on the index. This lets you track each individual control when calculating the status and value of the root control.
+
+
+
+#### Add an alias
+
+- Initially, the form contains one `Alias` field. To add another field, click the **Add Alias** button. You can also validate the array of aliases reported by the form model displayed by `Form Value` at the bottom of the template.
+
+- Instead of a form control instance for each alias, you can compose another form group instance with additional fields. The process of defining a control for each item is the same.
